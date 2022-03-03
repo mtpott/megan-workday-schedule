@@ -10,13 +10,13 @@ saveButtonEl = document.getElementsByClassName("saveBtn");
 // WHEN I open the planner
 // THEN the current day is displayed at the top of the calendar
 function showDate() {
-    var dateEl = document.createElement("p");
+    var dateEl = $("p")
     dateEl.textContent = moment().format("MMMM Do, YYYY - hh:mm a");
     var dateContainer = document.querySelector("#currentDay");
     //console.log(dateEl.textContent);
 
     //append dateEl to its parent container, dateContainer
-    dateContainer.appendChild(dateEl);
+    dateContainer.append(dateEl.textContent);
 };
 
 // WHEN I view the time blocks for that day
@@ -34,18 +34,24 @@ function auditItems(itemEl) {
         }
 }
 
+var items = {};
 
 // WHEN I click into a time block
 // THEN I can enter an event
 //item is entered into the textarea and the button is pressed to save the item
 function createItem() {
-    var itemToSave = document.getElementsByClassName(".textarea").value;
-    console.log(itemToSave);
+
+    var itemToSave = $("li")
+    .class(".textarea").value;
+
+    //append itemToSave to its parent container, textarea
+    textarea.appendChild(itemToSave);
 
     for (var i = 0; i < saveButtonEl.length; i++) {
         //add event listener for save button. items should be saved to the container
-        saveButtonEl.addEventListener("click", saveItem());
-        console.log("this worked");
+        saveButtonEl.click(function() {
+            console.log("this worked");
+        });
     }
 };
 
@@ -54,6 +60,7 @@ function createItem() {
 // THEN the text for that event is saved in local storage
 //saved user inputs added to localstorage
 function saveItem() {
+    var dateItem = 
 localStorage.setItem("name", JSON.stringify(items));
 
 console.log(savedItems);
