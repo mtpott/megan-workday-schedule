@@ -3,7 +3,9 @@
 // WHEN I refresh the page
 // THEN the saved events persist
 
-var items = {};
+
+//empty JS object
+var savedItems = {};
 
 saveButtonEl = document.getElementsByClassName("saveBtn");
 
@@ -17,6 +19,22 @@ function showDate() {
 
     //append dateEl to its parent container, dateContainer
     dateContainer.append(dateEl.textContent);
+};
+
+// WHEN I click into a time block
+// THEN I can enter an event
+//item is entered into the textarea and the button is pressed to save the item
+function createItem() {
+
+    var itemToSave = $("div").val();
+    var textAreaEl = $("textarea");
+
+    //append itemToSave to its parent container, textarea
+    textAreaEl.append(itemToSave);
+
+    console.log("createItem function");
+
+    saveItem();
 };
 
 // WHEN I view the time blocks for that day
@@ -34,43 +52,37 @@ function auditItems(itemEl) {
         }
 }
 
-var items = {};
-
-// WHEN I click into a time block
-// THEN I can enter an event
-//item is entered into the textarea and the button is pressed to save the item
-function createItem() {
-
-    var itemToSave = $("li")
-    .class(".textarea").value;
-
-    //append itemToSave to its parent container, textarea
-    textarea.appendChild(itemToSave);
-
-    for (var i = 0; i < saveButtonEl.length; i++) {
-        //add event listener for save button. items should be saved to the container
-        saveButtonEl.click(function() {
-            console.log("this worked");
-        });
-    }
-};
-
-
 // WHEN I click the save button for that time block
 // THEN the text for that event is saved in local storage
 //saved user inputs added to localstorage
 function saveItem() {
-    var dateItem = 
-localStorage.setItem("name", JSON.stringify(items));
+    localStorage.setItem("item", JSON.stringify(savedItems));
 
-console.log(savedItems);
+    console.log(localStorage.getItem("item"));
 
     //if there are no saved items, show nothing. if there are saved items, show them in their time blocks
-    if (savedItems === 0) {
+    if (!savedItems) {
         savedItems.textContent = "";
     } else {
-        localStorage.getItem("name");
+        showItem();
     }
 }
 
+function showItem(item) {
+    item = JSON.parse(localStorage.getItem("name"));
+}
+
 showDate();
+
+for (var i = 0; i < saveButtonEl.length; i++) {
+    //add event listener for save button. items should be saved to the container
+    saveButtonEl[i].onclick = function() {
+        //console.log("this worked");
+        createItem();
+    };
+};
+console.log(saveButtonEl);
+// //when i click the save button, createItem should run
+// saveButtonEl.onclick = function() {
+//     createItem()
+// };
