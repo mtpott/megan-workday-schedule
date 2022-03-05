@@ -7,6 +7,9 @@
 //empty JS object
 var savedItems = {};
 
+var itemToSave = $("div").val();
+var textAreaEl = $(".textarea").textContent;
+
 saveButtonEl = document.getElementsByClassName("saveBtn");
 
 // WHEN I open the planner
@@ -24,15 +27,13 @@ function showDate() {
 // WHEN I click into a time block
 // THEN I can enter an event
 //item is entered into the textarea and the button is pressed to save the item
-function createItem(itemToSave) {
-
-    var itemToSave = $("div").val();
-    var textAreaEl = $("textarea").val();
+function createItem() {
 
     //append itemToSave to its parent container, textarea
-    textAreaEl.append(itemToSave);
+    //textAreaEl.append(itemToSave);
 
-    console.log("createItem function");
+    //this console.log returns undefined in the console
+    console.log(textAreaEl);
 
     saveItem();
 };
@@ -73,7 +74,8 @@ function showItem(item) {
     console.log("showItem function");
 
     //append item to parent container, textAreaEl
-    textAreaEl.append(item);
+    itemToSave.append(textAreaEl);
+    console.log(textAreaEl);
 }
 
 showDate();
