@@ -24,10 +24,10 @@ function showDate() {
 // WHEN I click into a time block
 // THEN I can enter an event
 //item is entered into the textarea and the button is pressed to save the item
-function createItem() {
+function createItem(itemToSave) {
 
     var itemToSave = $("div").val();
-    var textAreaEl = $("textarea");
+    var textAreaEl = $("textarea").val();
 
     //append itemToSave to its parent container, textarea
     textAreaEl.append(itemToSave);
@@ -66,10 +66,14 @@ function saveItem() {
     } else {
         showItem();
     }
-}
+};
 
 function showItem(item) {
-    item = JSON.parse(localStorage.getItem("name"));
+    item = JSON.parse(localStorage.getItem("item"));
+    console.log("showItem function");
+
+    //append item to parent container, textAreaEl
+    textAreaEl.append(item);
 }
 
 showDate();
